@@ -93,16 +93,16 @@ Copyright (c) 2015 [Greg Traub][greg], [Dmitry Mozzherin][dimus]
 See [LICENSE][license] for details.
 
 
-[gem_badge]: https://badge.fury.io/rb/idigbio-ruby-client.svg
-[gem_link]: http://badge.fury.io/rb/idigbio-ruby-client
-[ci_badge]: https://secure.travis-ci.org/GlobalNamesArchitecture/idigbio-ruby-client.svg
-[ci_link]: http://travis-ci.org/GlobalNamesArchitecture/idigbio-ruby-client
-[cov_badge]: https://coveralls.io/repos/GlobalNamesArchitecture/idigbio-ruby-client/badge.svg?branch=master
-[cov_link]: https://coveralls.io/r/GlobalNamesArchitecture/idigbio-ruby-client?branch=master
-[code_badge]: https://codeclimate.com/github/GlobalNamesArchitecture/idigbio-ruby-client/badges/gpa.svg
-[code_link]: https://codeclimate.com/github/GlobalNamesArchitecture/idigbio-ruby-client
-[dep_badge]: https://gemnasium.com/GlobalNamesArchitecture/idigbio-ruby-client.png
-[dep_link]: https://gemnasium.com/GlobalNamesArchitecture/idigbio-ruby-client
+[gem_badge]: https://badge.fury.io/rb/idigbio_client.svg
+[gem_link]: http://badge.fury.io/rb/idigbio_client
+[ci_badge]: https://secure.travis-ci.org/GlobalNamesArchitecture/idigbio_client.svg
+[ci_link]: http://travis-ci.org/GlobalNamesArchitecture/idigbio_client
+[cov_badge]: https://coveralls.io/repos/GlobalNamesArchitecture/idigbio_client/badge.svg?branch=master
+[cov_link]: https://coveralls.io/r/GlobalNamesArchitecture/idigbio_client?branch=master
+[code_badge]: https://codeclimate.com/github/GlobalNamesArchitecture/idigbio_client/badges/gpa.svg
+[code_link]: https://codeclimate.com/github/GlobalNamesArchitecture/idigbio_client
+[dep_badge]: https://gemnasium.com/GlobalNamesArchitecture/idigbio_client.png
+[dep_link]: https://gemnasium.com/GlobalNamesArchitecture/idigbio_client
 [api]: https://www.idigbio.org/wiki/index.php/IDigBio_API
 [rubygems]: https://rubygems.org
 [license]: https://github.com/GlobalNamesArchitecture/idigbio-ruby-client/blob/master/LICENSE
