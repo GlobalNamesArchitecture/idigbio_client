@@ -16,10 +16,17 @@ module IdigbioClient
     end
 
     def search(opts)
-      opts = { path: "search/records/", method: "post", params: {} }.merge(opts)
-      prepare_params(opts[:params])
+      opts = prepare_opts(opts)
       resp = paginate(opts)
       block_given? ? yield(resp) : resp
+    end
+
+    def uuid(uuid, type = nil)
+      types = %i(record mediarecord recordset publisher)
+      unless type.nil? || types.include?(type.to_sym)
+        fail "Unknown type '#{type}'. Types: '#{types.join("', '")}'"
+      end
+      type ? find_uuid(uuid, [type]) : find_uuid(uuid, types)
     end
 
     def fields(type = "records")
@@ -37,7 +44,7 @@ module IdigbioClient
       url = URL + opts[:path]
       params = opts[:params]
       resp = post?(opts[:method]) ? post(url, params) : get(url, params)
-      resp = JSON.parse(resp.body, symbolize_names: true)
+      resp = JSON.parse(resp.body, symbolize_names: true) if resp
       sleep(0.3)
       block_given? ? yield(resp) : resp
     end
@@ -54,12 +61,21 @@ module IdigbioClient
       resp
     end
 
-    def prepare_params(params)
-      symbolize(params)
-      params[:rq] ||= {}
-      params[:limit] ||= DEFAULT_LIMIT
-      params[:limit] = MAX_LIMIT if params[:limit] > MAX_LIMIT
-      params[:offset] ||= 0
+    def prepare_opts(opts)
+      symbolize(opts)
+      opts = { type: :records, method: :post, params: {} }.merge(opts)
+      opts[:params] = { rq: {}, limit: DEFAULT_LIMIT, offset: 0, fields: [],
+                        fields_exclude: [], sort: [] }.merge(opts[:params])
+      opts[:path] = prepare_path(opts[:type])
+      opts
+    end
+
+    def prepare_path(type)
+      types = %i(records media)
+      unless types.include?(type.to_sym)
+        fail "Unknown search type '#{type}'. Types: '#{types.join(', ')}'"
+      end
+      "search/#{type}/"
     end
 
     def adjust_params(resp, params)
@@ -74,11 +90,17 @@ module IdigbioClient
     end
 
     def post(url, params)
-      RestClient.post(url, HEADERS.merge(params: params.to_json))
+      params = HEADERS.merge(params: params.to_json)
+      RestClient.post(url, params) do |resp, _req, _res|
+        resp.code == 200 ? resp : nil
+      end
     end
 
     def get(url, params)
-      RestClient.get(url, HEADERS.merge(query: params.to_json))
+      params = HEADERS.merge(query: params.to_json)
+      RestClient.get(url, params) do |resp, _req, _res|
+        resp.code == 200 ? resp : nil
+      end
     end
 
     def symbolize(h)
@@ -86,6 +108,14 @@ module IdigbioClient
         sym = k.to_sym
         h[sym] = h.delete(k)
         symbolize(h[sym]) if h[sym].is_a? Hash
+      end
+    end
+
+    def find_uuid(uuid, types)
+      types.each do |type|
+        path = "view/#{type}s/#{uuid}"
+        res = query(path: path, method: :get)
+        return res if res
       end
     end
 

@@ -4,6 +4,8 @@ AllCops:
     - bundle_bin/**/*
   Include:
     - exe/idigbio
+Metrics/ModuleLength:
+  Max: 1000
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 Style/DotPosition:
