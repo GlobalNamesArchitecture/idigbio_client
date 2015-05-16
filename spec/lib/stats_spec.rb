@@ -1,7 +1,7 @@
 describe IdigbioClient do
-  describe ".count_records" do
-    it "returns count" do
-      all = subject.count_records
+  describe ".count" do
+    it "counts records by default" do
+      all = subject.count
       expect(all).to be > 10
     end
   end
