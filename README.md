@@ -33,6 +33,17 @@ Usage
 
 ### Search
 
+#### Parameters
+
+parameter keys can be symbols or strings
+
+| Parameter | Description                                        |
+|-----------|----------------------------------------------------|
+| rq        | search query, default `{}`                         |
+| path      | search path, default `records/`                    |
+| limit     | how many records to return in total, default `100` |
+| offset    | from which record to start, default `0`            |
+
 ```ruby
 require "idigbio_client"
 
