@@ -18,6 +18,7 @@ Gem::Specification.new do |gem|
   gem.bindir        = "exe"
   gem.executables   = gem.files.grep(%r{^exe/}) { |f| File.basename(f) }
   gem.require_paths = ["lib"]
+  gem.add_dependency "rest-client", "~> 1.8"
 
   gem.add_development_dependency "bundler", "~> 1.7"
   gem.add_development_dependency "rake", "~> 10.0"
