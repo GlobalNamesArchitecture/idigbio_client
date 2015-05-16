@@ -2,7 +2,7 @@
 module IdigbioClient
   class << self
     def show(uuid, type = nil)
-      types = %i(record mediarecord recordset publisher)
+      types = [:record, :mediarecord, :recordset, :publisher]
       unless type.nil? || types.include?(type.to_sym)
         fail "Unknown type '#{type}'. Types: '#{types.join("', '")}'"
       end

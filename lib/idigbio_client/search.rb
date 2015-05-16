@@ -31,7 +31,7 @@ module IdigbioClient
     end
 
     def prepare_path(type)
-      types = %i(records media)
+      types = [:records, :media]
       unless types.include?(type.to_sym)
         fail "Unknown search type '#{type}'. Types: '#{types.join(', ')}'"
       end
