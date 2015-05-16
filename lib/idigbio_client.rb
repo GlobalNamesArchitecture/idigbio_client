@@ -7,6 +7,7 @@ require "idigbio_client/version"
 module IdigbioClient
   URL = "https://beta-search.idigbio.org/v2/"
   MAX_LIMIT = 100_000
+  DEFAULT_LIMIT = 100
   HEADERS = { content_type: :json, accept: :json }
 
   class << self
@@ -36,6 +37,7 @@ module IdigbioClient
       params = opts[:params]
       resp = post?(opts[:method]) ? post(url, params) : get(url, params)
       resp = JSON.parse(resp.body, symbolize_names: true)
+      sleep(0.3)
       block_given? ? yield(resp) : resp
     end
 
@@ -54,8 +56,8 @@ module IdigbioClient
     def prepare_params(params)
       symbolize(params)
       params[:rq] ||= {}
-      params[:limit] = MAX_LIMIT unless params[:limit] &&
-                                        params[:limit] < MAX_LIMIT
+      params[:limit] ||= DEFAULT_LIMIT
+      params[:limit] = MAX_LIMIT if params[:limit] > MAX_LIMIT
       params[:offset] ||= 0
     end
 
@@ -67,7 +69,7 @@ module IdigbioClient
     end
 
     def post?(method)
-      method.match(/post/i)
+      method.to_s.match(/post/i)
     end
 
     def post(url, params)

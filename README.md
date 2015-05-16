@@ -11,7 +11,8 @@ IdigbioClient
 `idigbio_client` is a Ruby wrapper for [iDigBio API][api]
 
 
-## Installation
+Installation
+------------
 
 Add this line to your application's Gemfile:
 
@@ -27,10 +28,19 @@ Or install it yourself as:
 
     $ gem install idigbio_client
 
-## Usage
+Usage
+-----
 
+### Search
 
-## Development
+```ruby
+require "idigbio_client"
+
+IdgBioClient.search({ rq: { :genus "acer" }, limit: 15 })
+```
+
+Development
+-----------
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run
 `bin/console` for an interactive prompt that will allow you to experiment.
@@ -52,7 +62,7 @@ commits and tags, and push the `.gem` file to
 Copyright
 ---------
 
-Author -- [Greg T.][greg], [Dmitry Mozzherin][dimus]
+Authors -- [Greg T.][greg], [Dmitry Mozzherin][dimus]
 
 Copyright (c) 2015 [Greg T.][greg], [Dmitry Mozzherin][dimus]
 See [LICENSE][license] for details.
