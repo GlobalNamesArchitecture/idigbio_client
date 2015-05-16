@@ -15,17 +15,19 @@ module IdigbioClient
       @logger ||= Logger.new($stdout)
     end
 
-    def logger_write(resp, params)
-      s = params[:offset] + 1
-      e = [params[:offset] + resp[:items].size, params[:limit]].min
-      logger.info("Processed items #{s}-#{e} out of #{params[:limit]}")
-    end
-
     def search(opts)
       opts = { path: "search/records/", method: "post", params: {} }.merge(opts)
       prepare_params(opts[:params])
       resp = paginate(opts)
       block_given? ? yield(resp) : resp
+    end
+
+    def fields(type = "records")
+      types = %w(records mediarecords recordsets publishers)
+      unless types.include?(type)
+        fail "Unknown type #{type}. Types: '#{types.join(', ')}'"
+      end
+      query(path: "meta/fields/#{type}", method: :get)
     end
 
     private
@@ -85,6 +87,12 @@ module IdigbioClient
         h[sym] = h.delete(k)
         symbolize(h[sym]) if h[sym].is_a? Hash
       end
+    end
+
+    def logger_write(resp, params)
+      s = params[:offset] + 1
+      e = [params[:offset] + resp[:items].size, params[:limit]].min
+      logger.info("Processed items #{s}-#{e} out of #{params[:limit]}")
     end
   end
 end
