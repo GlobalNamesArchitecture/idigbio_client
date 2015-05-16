@@ -22,8 +22,7 @@ module IdigbioClient
     end
 
     def search(opts)
-      opts = { path: "records/", method: "post", params: {} }.merge(opts)
-      opts[:path] = "search/#{opts[:path]}"
+      opts = { path: "search/records/", method: "post", params: {} }.merge(opts)
       prepare_params(opts[:params])
       resp = paginate(opts)
       block_given? ? yield(resp) : resp

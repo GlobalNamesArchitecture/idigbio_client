@@ -55,7 +55,13 @@ parameter keys can be symbols or strings
 require "idigbio_client"
 
 params = { rq: { :genus "acer" }, limit: 15 }
-IdigbioClient.search(params: params, path: records, method: post
+IdigbioClient.search(params: params)
+
+# using get method
+IdigbioClient.search(params: params, method: :get)
+
+# using other path
+IdigbioClient.search(params: params, method: :get, path: "search/")
 ```
 
 Development

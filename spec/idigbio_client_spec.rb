@@ -49,5 +49,14 @@ describe IdigbioClient do
         expect(res[:items].size).to eq 2
       end
     end
+
+    context "different path" do
+      let(:params) { { rq: { country: "USA" } } }
+
+      it "returns 2 results" do
+        res = subject.search(path: "search/", params: params)
+        expect(res[:items].size).to eq 100
+      end
+    end
   end
 end
