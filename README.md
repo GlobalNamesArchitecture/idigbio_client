@@ -87,9 +87,9 @@ commits and tags, and push the `.gem` file to
 Copyright
 ---------
 
-Authors -- [Greg T.][greg], [Dmitry Mozzherin][dimus]
+Authors -- [Greg Traub][greg], [Dmitry Mozzherin][dimus]
 
-Copyright (c) 2015 [Greg T.][greg], [Dmitry Mozzherin][dimus]
+Copyright (c) 2015 [Greg Traub][greg], [Dmitry Mozzherin][dimus]
 See [LICENSE][license] for details.
 
 
