@@ -49,6 +49,15 @@ commits and tags, and push the `.gem` file to
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create a new Pull Request
 
+Copyright
+---------
+
+Author -- [Greg T.][greg], [Dmitry Mozzherin][dimus]
+
+Copyright (c) 2015 [Greg T.][greg], [Dmitry Mozzherin][dimus]
+See [LICENSE][license] for details.
+
+
 [gem_badge]: https://badge.fury.io/rb/idigbio-ruby-client.svg
 [gem_link]: http://badge.fury.io/rb/idigbio-ruby-client
 [ci_badge]: https://secure.travis-ci.org/GlobalNamesArchitecture/idigbio-ruby-client.svg
@@ -61,3 +70,6 @@ commits and tags, and push the `.gem` file to
 [dep_link]: https://gemnasium.com/GlobalNamesArchitecture/idigbio-ruby-client
 [api]: https://www.idigbio.org/wiki/index.php/IDigBio_API
 [rubygems]: https://rubygems.org
+[license]: https://github.com/GlobalNamesArchitecture/idigbio-ruby-client/blob/master/LICENSE
+[greg]: https://github.com/gete76
+[dimus]: https://github.com/dimus
