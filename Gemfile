@@ -1,7 +1,4 @@
 source 'https://rubygems.org'
 
-gem 'mechanize'
-gem 'httparty'
-#gem 'pry-byebug'
-#gem 'mocha'
-gem 'minitest'
+# Specify your gem's dependencies in idigbio_client.gemspec
+gemspec
