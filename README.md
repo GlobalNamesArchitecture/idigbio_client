@@ -33,21 +33,29 @@ Usage
 
 ### Search
 
-#### Parameters
+#### Search Parameters
 
 parameter keys can be symbols or strings
 
 | Parameter | Description                                        |
 |-----------|----------------------------------------------------|
-| rq        | search query, default `{}`                         |
-| path      | search path, default `records/`                    |
+| method    | `"post"` or `"get"`, default `"post"`              |
+| path      | search path, default `"search/records/"`           |
+| params    | search options hash, default `{}`                  |
+
+##### Params parameters
+
+| Parameter | Description                                        |
+|-----------|----------------------------------------------------|
+| rq        | search query hash, default `{}`                    |
 | limit     | how many records to return in total, default `100` |
 | offset    | from which record to start, default `0`            |
 
 ```ruby
 require "idigbio_client"
 
-IdgBioClient.search({ rq: { :genus "acer" }, limit: 15 })
+params = { rq: { :genus "acer" }, limit: 15 }
+IdigbioClient.search(params: params, path: records, method: post
 ```
 
 Development
