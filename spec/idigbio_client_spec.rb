@@ -7,7 +7,6 @@ describe IdigbioClient do
   end
 
   describe ".search" do
-
     context "small query" do
       let(:params) { { "rq" => { "genus" => "acer" }, "limit" => 2 } }
 
@@ -18,7 +17,7 @@ describe IdigbioClient do
     end
 
     context "larger query" do
-      let(:params) { { "rq" => { :genus => "acer" }, :limit => 288 } }
+      let(:params) { { "rq" => { genus: "acer" }, :limit => 288 } }
 
       it "returns 288 items" do
         res = subject.search(params: params)

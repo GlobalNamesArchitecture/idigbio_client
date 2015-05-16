@@ -15,7 +15,7 @@ module IdigbioClient
     end
 
     def logger_write(resp, params)
-      s = params[:offset]+1
+      s = params[:offset] + 1
       e = [params[:offset] + resp[:items].size, params[:limit]].min
       logger.info("Processed items #{s}-#{e} out of #{params[:limit]}")
     end
