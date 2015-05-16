@@ -1,3 +1,31 @@
 #!/usr/bin/env ruby
 
 require "trollop"
+
+SUB_COMMANDS = %w(search)
+global_opts = Trollop.options do
+  banner "Client to iDibBio API \n" \
+         "Usage:\n" \
+         "idigbio search [opts]\n" \
+         "--------------------------"
+
+  stop_on SUB_COMMANDS
+end
+
+cmd = ARGV.shift
+cmd_opts = case cmd
+           when "search"
+             Trollop.options do
+               opt(:method,
+                   "HTTP method: get or post",
+                   short: "-m",
+                   default: "post")
+             end
+           else
+             Trollop.die "unknown subcommand #{cmd.inspect}"
+           end
+
+puts "Global options: #{global_opts.inspect}"
+puts "Subcommand: #{cmd.inspect}"
+puts "Subcommand options: #{cmd_opts.inspect}"
+puts "Remaining arguments: #{ARGV.inspect}"

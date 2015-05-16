@@ -68,7 +68,7 @@ module IdigbioClient
     end
 
     def post?(method)
-      method.to_s.match(/post/i)
+      !method.to_s.match(/get/i)
     end
 
     def post(url, params)

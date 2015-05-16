@@ -54,7 +54,7 @@ parameter keys can be symbols or strings
 ```ruby
 require "idigbio_client"
 
-params = { rq: { :genus "acer" }, limit: 15 }
+params = { rq: { genus: "acer" }, limit: 15 }
 IdigbioClient.search(params: params)
 
 # using get method
