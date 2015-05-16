@@ -3,4 +3,4 @@ require "coveralls"
 Coveralls.wear!
 
 require "support/helpers"
-require 'idigbio_client'
+require "idigbio_client"

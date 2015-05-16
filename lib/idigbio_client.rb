@@ -1,5 +1,5 @@
 require "idigbio_client/version"
 
+# Ruby wrapper for iDigBio API
 module IdigbioClient
-  # Your code goes here...
 end
