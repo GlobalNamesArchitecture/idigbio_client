@@ -8,10 +8,5 @@ module IdigbioClient
       end
       query(path: "meta/fields/#{type}", method: :get)
     end
-
-    def count_records(rq = {})
-      res = query(path: "summary/count/records/", params: { rq: rq })
-      res ? res["itemCount"] : nil
-    end
   end
 end

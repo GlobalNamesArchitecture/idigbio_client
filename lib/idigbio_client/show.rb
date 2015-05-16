@@ -1,7 +1,7 @@
 # Ruby wrapper for iDigBio API
 module IdigbioClient
   class << self
-    def uuid(uuid, type = nil)
+    def show(uuid, type = nil)
       types = %i(record mediarecord recordset publisher)
       unless type.nil? || types.include?(type.to_sym)
         fail "Unknown type '#{type}'. Types: '#{types.join("', '")}'"
