@@ -45,13 +45,18 @@ module IdigbioClient
     private
 
     def query(opts)
-      opts = { method: "post" }.merge(opts)
-      url = URL + opts[:path]
-      params = opts[:params]
+      url, params = url_params(opts)
       resp = post?(opts[:method]) ? post(url, params) : get(url, params)
       resp = JSON.parse(resp.body, symbolize_names: true) if resp
       sleep(0.3)
       block_given? ? yield(resp) : resp
+    end
+
+    def url_params(opts)
+      opts = { method: "post" }.merge(opts)
+      url = URL + opts[:path]
+      params = HEADERS.merge(params: opts[:params].to_json)
+      [url, params]
     end
 
     def post?(method)
@@ -59,15 +64,16 @@ module IdigbioClient
     end
 
     def post(url, params)
-      params = HEADERS.merge(params: params.to_json)
-      RestClient.post(url, params) do |resp, _req, _res|
-        resp.code == 200 ? resp : nil
-      end
+      request(:post, url, params)
     end
 
     def get(url, params)
-      params = HEADERS.merge(query: params.to_json)
-      RestClient.get(url, params) do |resp, _req, _res|
+      params[:query] = params.delete(:params)
+      request(:get, url, params)
+    end
+
+    def request(method, url, params)
+      RestClient.send(method, url, params) do |resp, _req, _res|
         resp.code == 200 ? resp : nil
       end
     end
