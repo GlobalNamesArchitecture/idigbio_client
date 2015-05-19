@@ -49,6 +49,13 @@ module IdigbioClient
       end
     end
 
+    def normalize_type(type)
+      type = type.to_s
+      return type if types.include?(type)
+      sym_types = types.map { |t| ":#{t}" }.join(", ")
+      fail "Unknown type :#{type}. Types: #{sym_types}"
+    end
+
     def symbolize(h)
       h.keys.each do |k|
         sym = k.to_sym

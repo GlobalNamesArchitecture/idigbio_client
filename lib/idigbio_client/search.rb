@@ -3,7 +3,9 @@ module IdigbioClient
   class << self
     def search(opts)
       opts = prepare_opts(opts)
+      orig_offset = opts[:params][:offset]
       resp = paginate(opts)
+      resp[:items] = resp[:items][0...(opts[:params][:limit] - orig_offset)]
       block_given? ? yield(resp) : resp
     end
 
@@ -17,7 +19,7 @@ module IdigbioClient
         items += resp[:items] if resp[:itemCount] > 0
         adjust_params(resp, params)
       end
-      resp[:items] = items[0...params[:limit]]
+      resp[:items] = items
       resp
     end
 
@@ -31,16 +33,15 @@ module IdigbioClient
     end
 
     def prepare_path(type)
-      types = [:records, :media]
-      unless types.include?(type.to_sym)
-        fail "Unknown search type '#{type}'. Types: '#{types.join(', ')}'"
-      end
+      type = normalize_type(type)
+      type.gsub!("mediarecords", "media")
       "search/#{type}/"
     end
 
     def adjust_params(resp, params)
       logger_write(resp, params)
-      params[:items_to_go] ||= [MAX_LIMIT, resp[:itemCount], params[:limit]].min
+      params[:items_to_go] ||=
+        [MAX_LIMIT, resp[:itemCount], params[:limit]].min - params[:offset]
       params[:offset] += resp[:items].size
       params[:items_to_go] -= resp[:items].size
     end
