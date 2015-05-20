@@ -4,6 +4,8 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "idigbio_client/version"
 
 Gem::Specification.new do |gem|
+  gem.license       = "MIT"
+  gem.required_ruby_version = ">= 1.9.0"
   gem.name          = "idigbio_client"
   gem.version       = IdigbioClient::VERSION
   gem.authors       = ["Greg T.", "Dmitry Mozzherin"]
