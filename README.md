@@ -31,7 +31,7 @@ Or install it yourself as:
 Usage
 -----
 
-Client functions can be grouped in 4 catetories
+Client functions can be grouped in 4 categories
 
 * [inspect][inspect] - introspective methods
 * [search][search] - search by provided parameters
@@ -51,9 +51,10 @@ Returns an array of types (resources) available via API.
 require "idigbio_client"
 
 IdigbioClient.types
+# returns ["records", "mediarecords", "recordsets", "publishers"]
 ```
 
-#### Method `IdigbioClient.fields(type)
+#### Method `IdigbioClient.fields(type)`
 
 Returns a hash with description of fields associated with a resource. Takes one
 optional parameter `type`. If type is not given it returns fields to all types
@@ -86,11 +87,11 @@ Takes a hash of opts, returns a hash with results of a search.
 
 ##### params
 
-| param.keys | Description                                        |
-|------------|----------------------------------------------------|
-| :rq        | search query hash, default `{}`                    |
-| :limit     | how many records to return in total, default `100` |
-| :offset    | from which record to start, default `0`            |
+| params.keys | Description                                          |
+|-------------|------------------------------------------------------|
+| :rq         | search query hash; *default* `{}`                    |
+| :limit      | how many records to return in total; *default* `100` |
+| :offset     | from which record to start; *default* `0`            |
 
 ```ruby
 require "idigbio_client"
@@ -128,7 +129,7 @@ Returns the number of records of a specified type
 | opts.keys  | Type             | Description                            |
 |------------|------------------|----------------------------------------|
 | :type      | String or Symbol | resource type; *default* `:records`    |
-| :params    | search options hash; *default* `{}`                       |
+| :params    | Hash             | search options hash; *default* `{}`    |
 
 ```ruby
 require "idigbio_client"
