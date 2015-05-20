@@ -40,7 +40,7 @@ Client functions can be grouped in 4 categories
 
 ### Inspect
 
-Methos in this section supply metainformation important for effective use
+Methods in this section supply meta-information important for effective use
 of the client.
 
 #### Method `IdigbioClient.types`
