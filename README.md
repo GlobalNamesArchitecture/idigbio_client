@@ -98,7 +98,11 @@ require "idigbio_client"
 
 # specimen records search
 params = { rq: { genus: "acer" }, limit: 15 }
-IdigbioClient.search(type: :records, params: params)
+IdigbioClient.search(params: params)
+
+# setting offset: will return only 5 records, assuming 10 were done before
+params = { rq: { genus: "acer" }, limit: 15, offset: 10 }
+IdigbioClient.search(params: params)
 
 # using non-default type
 IdigbioClient.search(type: :mediarecords, params: params)
