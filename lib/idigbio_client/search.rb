@@ -1,6 +1,8 @@
 module IdigbioClient
   # Performs Searh over iDigBio Resources
   module Search
+    extend IdigbioClient::Helper
+
     class << self
       def search(opts)
         opts = prepare_opts(opts)
@@ -25,7 +27,7 @@ module IdigbioClient
       end
 
       def prepare_opts(opts)
-        IdigbioClient.symbolize(opts)
+        symbolize(opts)
         opts = { type: :records, method: :post, params: {} }.merge(opts)
         opts[:params] = { rq: {}, limit: DEFAULT_LIMIT, offset: 0, fields: [],
                           fields_exclude: [], sort: [] }.merge(opts[:params])
@@ -34,7 +36,7 @@ module IdigbioClient
       end
 
       def prepare_path(type)
-        type = IdigbioClient.normalize_type(type)
+        type = normalize_type(type)
         type.gsub!("mediarecords", "media")
         "search/#{type}/"
       end
