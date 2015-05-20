@@ -8,7 +8,7 @@ Gem::Specification.new do |gem|
   gem.required_ruby_version = ">= 1.9.0"
   gem.name          = "idigbio_client"
   gem.version       = IdigbioClient::VERSION
-  gem.authors       = ["Greg T.", "Dmitry Mozzherin"]
+  gem.authors       = ["Greg Traub", "Dmitry Mozzherin"]
   gem.email         = ["dmozzherin@gmail.com"]
 
   gem.summary       = "Ruby wrapper for iDigBio API"
