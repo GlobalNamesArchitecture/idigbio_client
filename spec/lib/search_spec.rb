@@ -1,4 +1,4 @@
-describe IdigbioClient do
+describe IdigbioClient::Search do
   describe ".search" do
     let(:params) { { "rq" => { "genus" => "acer" }, "limit" => 2 } }
 
