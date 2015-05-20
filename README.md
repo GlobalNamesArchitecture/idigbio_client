@@ -31,6 +31,15 @@ Or install it yourself as:
 Usage
 -----
 
+API functions can be grouped in 4 catetories
+
+* [inspect][inspect] - introspective methods
+* [search][search] - search by provided parameters
+* [show][show] - show any one object based on its UUID
+* [stats][stats] - various statistical data
+
+### Inspect
+
 ### Search
 
 #### Search Parameters
@@ -63,6 +72,9 @@ IdigbioClient.search(params: params, method: :get)
 # using other path
 IdigbioClient.search(params: params, method: :get, path: "search/")
 ```
+### Show
+
+### Stats
 
 Development
 -----------
@@ -104,6 +116,10 @@ See [LICENSE][license] for details.
 [dep_badge]: https://gemnasium.com/GlobalNamesArchitecture/idigbio_client.png
 [dep_link]: https://gemnasium.com/GlobalNamesArchitecture/idigbio_client
 [api]: https://www.idigbio.org/wiki/index.php/IDigBio_API
+[inspect]: #inspect
+[search]: #search
+[show]: #show
+[stats]: #stats
 [rubygems]: https://rubygems.org
 [license]: https://github.com/GlobalNamesArchitecture/idigbio-ruby-client/blob/master/LICENSE
 [greg]: https://github.com/gete76
