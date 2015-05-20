@@ -31,7 +31,7 @@ Or install it yourself as:
 Usage
 -----
 
-API functions can be grouped in 4 catetories
+Client functions can be grouped in 4 catetories
 
 * [inspect][inspect] - introspective methods
 * [search][search] - search by provided parameters
@@ -40,41 +40,103 @@ API functions can be grouped in 4 catetories
 
 ### Inspect
 
-### Search
+Methos in this section supply metainformation important for effective use
+of the client.
 
-#### Search Parameters
+#### Method `IdigbioClient.types`
 
-parameter keys can be symbols or strings
-
-| Parameter | Description                                        |
-|-----------|----------------------------------------------------|
-| method    | `"post"` or `"get"`, default `"post"`              |
-| path      | search path, default `"search/records/"`           |
-| params    | search options hash, default `{}`                  |
-
-##### Params parameters
-
-| Parameter | Description                                        |
-|-----------|----------------------------------------------------|
-| rq        | search query hash, default `{}`                    |
-| limit     | how many records to return in total, default `100` |
-| offset    | from which record to start, default `0`            |
+Returns an array of types (resources) available via API.
 
 ```ruby
 require "idigbio_client"
 
+IdigbioClient.types
+```
+
+#### Method `IdigbioClient.fields(type)
+
+Returns a hash with description of fields associated with a resource. Takes one
+optional parameter `type`. If type is not given it returns fields to all types
+in a hash.
+
+| Parameter  | Type             | Description                                                   |
+|------------|------------------|---------------------------------------------------------------|
+| type       | String or Symbol | indicates which type to query for its fields; *default* `nil` |
+
+```ruby
+require "idigbio_client"
+
+IdigbioClient.fields
+
+# fields of a specific type
+IdigbioClient.fields(:mediarecords)
+IdigbioClient.fields("records")
+```
+
+### Search
+
+#### Method `IdigbioClient.search(opts)`
+
+Takes a hash of opts, returns a hash with results of a search.
+
+| opts.keys  | Type             | Description                            |
+|------------|------------------|----------------------------------------|
+| :type      | String or Symbol | resource type; *default* `:records`    |
+| :params    | search options hash; *default* `{}`                       |
+
+##### params
+
+| param.keys | Description                                        |
+|------------|----------------------------------------------------|
+| :rq        | search query hash, default `{}`                    |
+| :limit     | how many records to return in total, default `100` |
+| :offset    | from which record to start, default `0`            |
+
+```ruby
+require "idigbio_client"
+
+# specimen records search
 params = { rq: { genus: "acer" }, limit: 15 }
-IdigbioClient.search(params: params)
+IdigbioClient.search(type: :records, params: params)
 
-# using get method
-IdigbioClient.search(params: params, method: :get)
-
-# using other path
-IdigbioClient.search(params: params, method: :get, path: "search/")
+# using non-default type
+IdigbioClient.search(type: :mediarecords, params: params)
 ```
 ### Show
 
+#### Method: `IdigbioClient.show(uuid)`
+
+Takes uuid, returns record associated with UUID. Record can be of any type.
+
+| Parameters | Type   | Description |
+|------------|--------|-------------|
+| uuid       | String | UUID        |
+
+
+```ruby
+require "idigbio_client"
+
+IdigbioClient.show("1c29be70-24e7-480b-aab1-61224ded0f34")
+```
+
 ### Stats
+
+#### Method: `IdigbioClient.count(opts)`
+
+Returns the number of records of a specified type
+
+| opts.keys  | Type             | Description                            |
+|------------|------------------|----------------------------------------|
+| :type      | String or Symbol | resource type; *default* `:records`    |
+| :params    | search options hash; *default* `{}`                       |
+
+```ruby
+require "idigbio_client"
+
+IdigbioClient.count
+IdigbioClient.count(type: :recordsets)
+IdigbioClient.count(type: :mediarecords, params: { rq: { genus: "acer" } })
+```
 
 Development
 -----------

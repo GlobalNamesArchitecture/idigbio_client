@@ -31,14 +31,17 @@ module IdigbioClient
     end
 
     def count(opts = {})
-      opts = { type: "record", params: {} }.merge(opts)
-      res = query(path: "summary/count/#{opts[:type]}s/", params: opts[:params])
+      opts = { type: "records", params: {} }.merge(opts)
+      type = normalize_type(opts[:type])
+      res = query(path: "summary/count/#{type}/", params: opts[:params])
       res ? res[:itemCount] : nil
     end
 
-    def fields(type = "records")
-      type = normalize_type(type)
-      query(path: "meta/fields/#{type}", method: :get)
+    def fields(type = nil)
+      types = type ? [normalize_type(type)] : IdigbioClient.types
+      types.each_with_object({}) do |t, res|
+        res[t.to_sym] = query(path: "meta/fields/#{t}", method: :get)
+      end
     end
   end
 end
