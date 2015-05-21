@@ -100,7 +100,7 @@ require "idigbio_client"
 params = { rq: { genus: "acer" }, limit: 15 }
 IdigbioClient.search(params: params)
 
-# setting offset: will return only 5 records, assuming 10 were done before
+# setting offset: will start count for 15 records from 11th result
 params = { rq: { genus: "acer" }, limit: 15, offset: 10 }
 IdigbioClient.search(params: params)
 

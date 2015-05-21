@@ -17,9 +17,9 @@ describe IdigbioClient do
         expect(res[:items].size).to eq 288
       end
 
-      it "returns 188 items with offset 100" do
+      it "returns 288 items with offset 100" do
         res = subject.search(params: params.merge(offset: 100))
-        expect(res[:items].size).to eq 188
+        expect(res[:items].size).to eq 288
       end
     end
 
